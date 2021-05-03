@@ -1,6 +1,6 @@
 ## Kson
 
-A lightweight `Kotlin` DSL to render to `String`.
+A lightweight `Kotlin` DSL to render `Json` to `String`.
 
 ### DSL
 
