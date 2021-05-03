@@ -5,18 +5,6 @@ open class Kson(var isPretty: Boolean = false, var level: Int = 0) {
     val sb by lazy { StringBuilder() }
 
     fun wrapAppend(string: String): StringBuilder = sb.append('\"').append(string).append('\"')
-    inline fun wrapLine(action: () -> Unit = {}) {
-        if (!isPretty) {
-            action()
-            sb.append(',')
-            return
-        }
-        repeat(level + 1) {
-            sb.append('\t')
-        }
-        action()
-        sb.append(',').append('\n')
-    }
 
     operator fun String.minus(value: Nothing?) {
         sb.clear()
@@ -64,12 +52,27 @@ open class Kson(var isPretty: Boolean = false, var level: Int = 0) {
 val arr
     get() = KsonArray()
 
-fun obj(isPretty: Boolean = false, level: Int = 0, action: Kson.() -> Unit) = Kson(isPretty, level).apply(action)
+fun obj(isPretty: Boolean = false, action: Kson.() -> Unit) = Kson(isPretty).apply(action)
 
 class KsonArray(isPretty: Boolean = false, level: Int = 0) : Kson(isPretty, level) {
     val ksonList = ArrayList<Kson>()
     val ksonListIndex = ArrayList<Int>()
-    inline operator fun <reified T> get(collection: Collection<T>) = get(collection.toTypedArray())
+
+    operator fun get(collection: Collection<Any?>) = apply {
+        collection.forEach {
+            if (it == null) list.add("null")
+            else when (it) {
+                is Kson -> {
+                    list.add("")
+                    ksonList.add(it)
+                    ksonListIndex.add(list.lastIndex)
+                }
+                is Number, is Boolean -> list.add(it.toString())
+                else -> list.add(wrapAppend(it.toString()).toString())
+            }
+        }
+    }
+
     inline operator fun <reified T> get(vararg v: T) = apply {
         v.forEach {
             if (it == null) list.add("null")
@@ -78,7 +81,6 @@ class KsonArray(isPretty: Boolean = false, level: Int = 0) : Kson(isPretty, leve
                     list.add("")
                     ksonList.add(it)
                     ksonListIndex.add(list.lastIndex)
-//                    list.add(.apply { isPretty = this@KsonArray.isPretty;level = this@KsonArray.level + 1 }.toString())
                 }
                 is Number, is Boolean -> list.add(it.toString())
                 else -> list.add(wrapAppend(it.toString()).toString())
@@ -86,9 +88,8 @@ class KsonArray(isPretty: Boolean = false, level: Int = 0) : Kson(isPretty, leve
         }
     }
 
-    operator fun invoke(pretty: Boolean, l: Int) = apply {
+    operator fun invoke(pretty: Boolean) = apply {
         isPretty = pretty
-        level = l
     }
 
     override fun wrapper(action: () -> Unit): String {

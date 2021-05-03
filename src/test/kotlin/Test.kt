@@ -54,6 +54,25 @@ fun main() {
         "d" - null
         "f" - another
     }.prl()
+    obj{}.prl() // empty object
+    obj { // object contains key-value
+        "awa" - 1
+        "QwQ" - false
+        "\"raw\":\"aaaa\"".raw()
+    }.prl()
+    arr.prl() // empty array
+    arr[1, "s", null].prl() // array with elements
+    arr[listOf("awa",null,1,false)].prl()
+
+// we can combine these elements whatever you want
+    obj(true) {
+        "awa" - 1
+        "QwQ" - false
+        "qwq" - arr[
+            3,
+            4
+        ]
+    }.prl()
 }
 
 fun Any.prl() = println(this)
