@@ -1,5 +1,5 @@
 fun main() {
-    kson(true) {
+    nbj(true) {
         "awa" - 1
         "b" - false
         "c" - "888"

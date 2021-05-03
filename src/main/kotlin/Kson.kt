@@ -56,7 +56,7 @@ open class Kson(var isPretty: Boolean = false, var level: Int = 0) {
     }
 }
 
-fun kson(isPretty: Boolean = false, level: Int = 0, action: Kson.() -> Unit) = Kson(isPretty, level).apply(action)
+fun nbj(isPretty: Boolean = false, level: Int = 0, action: Kson.() -> Unit) = Kson(isPretty, level).apply(action)
 
 class KsonArray(isPretty: Boolean = false, level: Int = 0) : Kson(isPretty, level) {
     inline operator fun <reified T> get(collection: Collection<T>) = get(collection.toTypedArray())
