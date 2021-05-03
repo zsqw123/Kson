@@ -23,9 +23,7 @@ open class Kson(var isPretty: Boolean = false, var level: Int = 0) {
         wrapAppend(this).append(':')
         if (value == null) sb.append("null")
         else when (value) {
-            is Kson -> {
-                sb.append(value.apply { isPretty = this@Kson.isPretty;level = this@Kson.level + 1 }.toString())
-            }
+            is Kson -> sb.append(value.apply { isPretty = this@Kson.isPretty;level = this@Kson.level + 1 }.toString())
             is Number, is Boolean -> sb.append(value.toString())
             else -> wrapAppend(value.toString())
         }
@@ -40,7 +38,8 @@ open class Kson(var isPretty: Boolean = false, var level: Int = 0) {
     }
 
     fun obj(action: Kson.() -> Unit) = Kson(isPretty, level + 1).apply(action)
-    val arr by lazy { KsonArray().apply { isPretty = this@Kson.isPretty;level = this@Kson.level + 1 } }
+    fun nbj(action: Kson.() -> Unit) = Kson(isPretty, level + 2).apply(action)
+    val arr by lazy { KsonArray(isPretty, level + 1) }
 
     open fun wrapper(action: () -> Unit): String {
         sb.insert(0, '{')
@@ -57,17 +56,23 @@ open class Kson(var isPretty: Boolean = false, var level: Int = 0) {
     }
 }
 
-fun obj(isPretty: Boolean = false, level: Int = 0, action: Kson.() -> Unit) = Kson(isPretty, level).apply(action)
+fun kson(isPretty: Boolean = false, level: Int = 0, action: Kson.() -> Unit) = Kson(isPretty, level).apply(action)
 
-class KsonArray : Kson() {
+class KsonArray(isPretty: Boolean = false, level: Int = 0) : Kson(isPretty, level) {
     inline operator fun <reified T> get(collection: Collection<T>) = get(collection.toTypedArray())
     inline operator fun <reified T> get(vararg values: T) = apply {
         sb.clear()
         values.forEach {
-            when (it) {
-                is Kson -> wrapLine { sb.append(it.apply { isPretty = this@KsonArray.isPretty;level = this@KsonArray.level + 1 }) }
-                is Number, is Boolean -> wrapLine { sb.append(it) }
-                else -> wrapLine { wrapAppend(it.toString()) }
+            wrapLine {
+                if (it == null) {
+                    sb.append("null")
+                    return@wrapLine
+                }
+                when (it) {
+                    is Kson -> sb.append(it.apply { isPretty = this@KsonArray.isPretty;level = this@KsonArray.level + 1 })
+                    is Number, is Boolean -> sb.append(it)
+                    else -> wrapAppend(it.toString())
+                }
             }
         }
     }

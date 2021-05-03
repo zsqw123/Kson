@@ -1,18 +1,21 @@
 fun main() {
-    obj(true) {
+    kson(true) {
         "awa" - 1
         "b" - false
         "c" - "888"
         "o" - obj {
             "hhh" - 66
             "az" - null
-            "mmp" - false
+            "mmp" - true
         }
         "e" - arr[
             1,
             null,
-            obj {
-                "套娃" - 666
+            nbj {
+                "o" - 666
+                "oo" - obj {
+                    "ooo" - null
+                }
                 "222" - false
             },
             false
