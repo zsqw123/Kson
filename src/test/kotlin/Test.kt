@@ -1,5 +1,20 @@
 fun main() {
-    nbj(true) {
+    val another = arr[
+        1,
+        null,
+        arr[
+            1, 2,
+            arr[1, 2,
+                obj {
+                    "awa" - 1
+                }
+            ],
+        ],
+        obj {
+            "awa" - 1
+        }
+    ]
+    obj(true) {
         "awa" - 1
         "b" - false
         "c" - "888"
@@ -11,8 +26,23 @@ fun main() {
         "e" - arr[
             1,
             null,
-            nbj {
-                "o" - 666
+            obj {
+                "o" - obj {
+                    "o" - obj {
+                        "o" - obj {
+                            "o" - 666
+                            "k" - arr[
+                                1,
+                                888,
+                                "bbb",
+                                obj {
+                                    "222" - 1
+                                }
+                            ]
+                        }
+                    }
+                }
+                "o" - 888
                 "oo" - obj {
                     "ooo" - null
                 }
@@ -22,6 +52,7 @@ fun main() {
         ]
         "\"raw\":\"aaaa\"".raw()
         "d" - null
+        "f" - another
     }.prl()
 }
 
