@@ -1,0 +1,10 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.0-RC'
+}
+
+group = 'com.zsqw123'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
