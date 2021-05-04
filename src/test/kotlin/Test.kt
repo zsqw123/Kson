@@ -1,5 +1,5 @@
 fun main() {
-    val another = parr[
+    val another = arr[
         1,
         null,
         arr[
@@ -64,12 +64,13 @@ fun main() {
     arr[1, "s", null].prl() // array with elements
     arr[listOf("awa", null, 1, false)].prl()
 
-// we can combine these elements whatever you want
-    pobj {
-        "awa" - 1
-        "QwQ" - false
-        "qwq" - arr[listOf(1, null, false, "555")]
-    }.prl()
+    parr[
+        pobj {
+            "awa" - 1
+            "QwQ" - false
+            "qwq" - arr[listOf(1, null, false, "555")]
+        }
+    ].prl()
 }
 
 fun Any.prl() = println(this)

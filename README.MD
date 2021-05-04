@@ -16,7 +16,7 @@ arr // empty array
 arr[1, "s", null] // array with elements
 arr[listOf("awa",null,1,false)] // it can provided by any collections
 
-// we can combine these elements whatever you want
+// you can combine these elements whatever you want
 arr[
     1, 
     2,
@@ -44,13 +44,27 @@ arr[
 
 #### Pretty outputs
 
-Just need pass in the `true`, all child object will be pretty.
+when pass in the `pobj`, All child object `obj, arr` will be pretty.
+
+when pass in the `parr`, Only those who are directly related `obj` will be pretty.
 
 ```kotlin
-obj(true) { //... }
-arr(true) [ //... ]
-//TODO Notice: There are some problems when use arr 
-//    as parent and parameter is true!!
+pobj {
+    obj{
+        "1" - arr[
+            arr[
+                obj{
+                    // work well, it well pretty print
+                }
+            ]
+        ]
+    }
+}
+parr [
+    parr[
+        
+    ]
+]
 ```
 
 output like this:
