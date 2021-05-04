@@ -106,4 +106,7 @@ Score in operations/second (throughput mode), higher is better
 
 #### Thanks
 
-This repository inspired by this repo [lectra-tech/koson](https://github.com/lectra-tech/koson), Only reference its api, But the implementation is not same.
+1. This repository inspired by this repo [lectra-tech/koson](https://github.com/lectra-tech/koson), Only reference its api, But the implementation is not same.
+2. Why use `-` ?? 见下图:
+
+![](https://cdn.jsdelivr.net/gh/zsqw123/cdn@master/picCDN/20210504144051.png)

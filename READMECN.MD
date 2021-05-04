@@ -106,4 +106,7 @@ output like this:
 
 #### Thanks
 
-灵感来源于 [lectra-tech/koson](https://github.com/lectra-tech/koson), 仅借鉴其 `api`, 实现并不一致
+1. 灵感来源于 [lectra-tech/koson](https://github.com/lectra-tech/koson), 仅借鉴其 `api`, 实现并不一致
+2. 为什么要用 `-` ?? 见下图:
+
+![](https://cdn.jsdelivr.net/gh/zsqw123/cdn@master/picCDN/20210504144051.png)

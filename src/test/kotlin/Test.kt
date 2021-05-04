@@ -15,11 +15,11 @@ fun main() {
         }
     ]
     pobj {
-        "awa" - 1
+        "awa" - 1.3
         "b" - false
         "c" - "888"
         "o" - obj {
-            "hhh" - 66
+            "hhh" - 66.666
             "az" - null
             "mmp" - true
         }
