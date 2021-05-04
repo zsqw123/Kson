@@ -2,25 +2,39 @@ import java.util.*
 
 open class Kson(var isPretty: Boolean = false, var level: Int = 0) {
     val list = LinkedList<String>()
-    val sb by lazy { StringBuilder() }
+    private val sb by lazy { StringBuilder() }
+    open val pre = '{'
+    open val end = '}'
 
     fun wrapAppend(string: String): StringBuilder = sb.append('\"').append(string).append('\"')
-
-    operator fun String.minus(value: Nothing?) {
+    private inline fun wrapAdd(method: () -> Unit) {
         sb.clear()
-        wrapAppend(this).append(":null")
+        method()
         list.add(sb.toString())
     }
 
-    inline operator fun <reified T> String.minus(value: T) {
-        sb.clear()
+    operator fun String.minus(value: Nothing?) = wrapAdd {
+        wrapAppend(this).append(":null")
+    }
+
+    operator fun String.minus(value: Kson) = wrapAdd {
         wrapAppend(this).append(':')
-        when (value) {
-            is Kson -> sb.append(value.apply { isPretty = this@Kson.isPretty;level = this@Kson.level + 1 })
-            is Number, is Boolean -> sb.append(value)
-            else -> wrapAppend(value.toString())
-        }
-        list.add(sb.toString())
+        sb.append(value.apply { isPretty = this@Kson.isPretty;level = this@Kson.level + 1 })
+    }
+
+    operator fun String.minus(value: Number) = wrapAdd {
+        wrapAppend(this).append(':')
+        sb.append(value)
+    }
+
+    operator fun String.minus(value: Boolean) = wrapAdd {
+        wrapAppend(this).append(':')
+        sb.append(value)
+    }
+
+    operator fun String.minus(value: Any) = wrapAdd {
+        wrapAppend(this).append(':')
+        wrapAppend(value.toString())
     }
 
     fun Any.raw() {
@@ -30,12 +44,12 @@ open class Kson(var isPretty: Boolean = false, var level: Int = 0) {
     val arr
         get() = KsonArray(isPretty, level + 1)
 
-    fun obj(action: Kson.() -> Unit) = Kson(isPretty, level + 2).apply(action)
+    inline fun obj(action: Kson.() -> Unit) = Kson(isPretty, level + 2).apply(action)
 
-    open fun wrapper(action: () -> Unit): String {
-        sb.clear().append('{')
+    private inline fun wrapper(action: () -> Unit): String {
+        sb.clear().append(pre)
         action()
-        return sb.append('}').toString()
+        return sb.append(end).toString()
     }
 
     override fun toString(): String = wrapper {
@@ -57,6 +71,8 @@ fun obj(isPretty: Boolean = false, action: Kson.() -> Unit) = Kson(isPretty).app
 class KsonArray(isPretty: Boolean = false, level: Int = 0) : Kson(isPretty, level) {
     val ksonList = ArrayList<Kson>()
     val ksonListIndex = ArrayList<Int>()
+    override val pre = '['
+    override val end = ']'
 
     operator fun get(collection: Collection<Any?>) = apply {
         collection.forEach {
@@ -92,11 +108,9 @@ class KsonArray(isPretty: Boolean = false, level: Int = 0) : Kson(isPretty, leve
         isPretty = pretty
     }
 
-    override fun wrapper(action: () -> Unit): String {
-        sb.clear().insert(0, '[')
+    override fun toString(): String {
         for (k in ksonList.indices)
             list[ksonListIndex[k]] = ksonList[k].apply { isPretty = this@KsonArray.isPretty;level = this@KsonArray.level + 1 }.toString()
-        action()
-        return sb.append(']').toString()
+        return super.toString()
     }
 }

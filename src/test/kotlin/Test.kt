@@ -54,7 +54,7 @@ fun main() {
         "d" - null
         "f" - another
     }.prl()
-    obj{}.prl() // empty object
+    obj {}.prl() // empty object
     obj { // object contains key-value
         "awa" - 1
         "QwQ" - false
@@ -62,16 +62,13 @@ fun main() {
     }.prl()
     arr.prl() // empty array
     arr[1, "s", null].prl() // array with elements
-    arr[listOf("awa",null,1,false)].prl()
+    arr[listOf("awa", null, 1, false)].prl()
 
 // we can combine these elements whatever you want
     obj(true) {
         "awa" - 1
         "QwQ" - false
-        "qwq" - arr[
-            3,
-            4
-        ]
+        "qwq" - arr[listOf(1, null, false, "555")]
     }.prl()
 }
 
