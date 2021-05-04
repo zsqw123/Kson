@@ -105,26 +105,7 @@ class PrettyKsonArr(var level: Int = 0) {
     private val ksonListIndex = ArrayList<Int>()
     private val arrListIndex = ArrayList<Int>()
     private fun StringBuilder.wrapAppend(string: String) = append('\"').append(string).append('\"')
-    operator fun get(collection: Collection<Any?>) = apply {
-        list = Array(collection.size) { StringBuilder() }
-        var idx = 0
-        collection.forEach {
-            if (it == null) list[idx++].append("null")
-            else when (it) {
-                is PrettyKson -> {
-                    ksonList.add(it)
-                    ksonListIndex.add(idx++)
-                }
-                is PrettyKsonArr -> {
-                    arrList.add(it)
-                    arrListIndex.add(idx++)
-                }
-                is Number, is Boolean -> list[idx++].append(it.toString())
-                else -> list[idx++].wrapAppend(it.toString())
-            }
-        }
-    }
-
+    operator fun get(collection: Collection<Any?>) = get(*collection.toTypedArray())
     operator fun get(vararg array: Any?) = apply {
         list = Array(array.size) { StringBuilder() }
         var idx = 0
