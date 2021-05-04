@@ -14,7 +14,7 @@ fun main() {
             "awa" - 1
         }
     ]
-    obj(true) {
+    obj {
         "awa" - 1
         "b" - false
         "c" - "888"
@@ -65,7 +65,7 @@ fun main() {
     arr[listOf("awa", null, 1, false)].prl()
 
 // we can combine these elements whatever you want
-    obj(true) {
+    obj {
         "awa" - 1
         "QwQ" - false
         "qwq" - arr[listOf(1, null, false, "555")]

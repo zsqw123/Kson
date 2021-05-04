@@ -6,5 +6,5 @@ fun timer(method: () -> Unit): Long {
 
 fun main() {
     timer { jsonWithBigArray() }.prl()
-    timer { ksonWithBigArray().prl() }.prl()
+    timer { ksonWithBigArray() }.prl()
 }

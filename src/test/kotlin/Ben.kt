@@ -447,8 +447,8 @@ fun jsonWithBigArray(): String {
 
 fun ksonWithBigArray(): String {
     val koson =
-        arr(true)[45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, "firstElement",
-            obj(true) {
+        arr[45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, "firstElement",
+            obj {
                 "string" - "value"
                 "int" - 9
                 "double" - 7.6
