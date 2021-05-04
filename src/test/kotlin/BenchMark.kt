@@ -11,13 +11,15 @@ fun timer(method: () -> Unit): Long {
 }
 
 fun main() {
-//    val ben = t.Ben()
+//    val ben = Ben()
     val opt: Options = OptionsBuilder()
         .include(Ben::class.java.simpleName) // 指明本次要跑的类
         .forks(1) // fork JVM的数量
         .build()
 
     Runner(opt).run()
-//    timer { ben.jsonWithBigArray() }.prl()
-//    timer { ben.ksonWithBigArray() }.prl()
+//    timer { ben.jsonWithBigArray().prl() }.prl()
+//    timer { ben.ksonWithBigArray().prl() }.prl()
+//    timer { ben.jsonWithBigArrayPretty() }.prl()
+//    timer { ben.ksonWithBigArrayPretty() }.prl()
 }

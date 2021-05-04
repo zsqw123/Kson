@@ -99,10 +99,12 @@ Testing environment : *AMD Ryzen 7 4800U, 8 cores 16 threads, VM version: JDK 1.
 
 Score in operations/second (throughput mode), higher is better
 
-| Benchmark        | Score     | Error     | Unit  |
-| ---------------- | --------- | --------- | ----- |
-| jsonWithBigArray | 15746.152 | ± 524.543 | ops/s |
-| ksonWithBigArray | 21958.445 | ± 144.323 | ops/s |
+| Benchmark                 | Score     | Error     | Unit  |
+| ------------------------- | --------- | --------- | ----- |
+| jsonWithBigArray          | 15746.152 | ± 524.543 | ops/s |
+| ksonWithBigArray          | 21958.445 | ± 144.323 | ops/s |
+| jsonWithBigArray (Pretty) | 7477.957  | ± 115.563 | ops/s |
+| ksonWithBigArray (Pretty) | 8532.050  | ± 43.227  | ops/s |
 
 #### Thanks
 
