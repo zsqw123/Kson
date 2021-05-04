@@ -89,7 +89,7 @@ output like this:
 
 ### 跑个分
 
-跑分使用了 OpenJDK [jmh](https://openjdk.java.net/projects/code-tools/jmh/). 可以在 `benchmarks` 查看具体测试
+跑分使用了 OpenJDK [jmh](https://openjdk.java.net/projects/code-tools/jmh/). 可以在 [BenchMark.kt](https://github.com/zsqw123/Kson/blob/master/src/test/kotlin/BenchMark.kt) 查看具体测试
 
 测试对象是 `Kson` 与最流行的JSON构建器之一 : [`JSON-java`](https://github.com/stleary/JSON-java)
 

@@ -91,7 +91,7 @@ output like this:
 
 ### Benchmark
 
-Benchmarks have been conducted with the [jmh](https://openjdk.java.net/projects/code-tools/jmh/) OpenJDK tool. Benchmark can be found under `benchmarks` folder.
+Benchmarks have been conducted with the [jmh](https://openjdk.java.net/projects/code-tools/jmh/) OpenJDK tool. Benchmark can be found in [BenchMark.kt](https://github.com/zsqw123/Kson/blob/master/src/test/kotlin/BenchMark.kt)
 
 `Kson` was put side to side with one of the most popular JSON builder for `Java` : [JSON-java](https://github.com/stleary/JSON-java)
 
@@ -107,6 +107,6 @@ Score in operations/second (throughput mode), higher is better
 #### Thanks
 
 1. This repository inspired by this repo [lectra-tech/koson](https://github.com/lectra-tech/koson), Only reference its api, But the implementation is not same.
-2. Why use `-` ?? 见下图:
+2. Why use `-` ?? Look this:
 
 ![](https://cdn.jsdelivr.net/gh/zsqw123/cdn@master/picCDN/20210504144051.png)
