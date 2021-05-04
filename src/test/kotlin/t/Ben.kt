@@ -38,7 +38,7 @@ import org.json.*
 import org.openjdk.jmh.annotations.Benchmark
 
 open class Ben {
-//    @Benchmark
+    @Benchmark
     fun jsonWithBigArray(): String {
         val json = JSONArray().put(45).put(12.4).put(9.4).put(true).put(false).put(
             true
@@ -465,7 +465,7 @@ open class Ben {
         return json.toString()
     }
 
-//    @Benchmark
+    @Benchmark
     fun ksonWithBigArray(): String {
         val kson =
             arr[45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, 45, 12.4, 9.4, true, false, true, null, "firstElement",
@@ -722,7 +722,7 @@ open class Ben {
         return kson.toString()
     }
 
-//    @Benchmark
+    @Benchmark
     fun jsonWithBigArrayPretty(): String {
         val json = JSONArray().put(45).put(12.4).put(9.4).put(true).put(false).put(
             true

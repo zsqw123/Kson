@@ -97,10 +97,12 @@ output like this:
 
 每秒操作数得分（吞吐量模式），`Score` 越高越好, `Error` 绝对值越低越稳定
 
-| Benchmark        | Score     | Error     | Unit  |
-| ---------------- | --------- | --------- | ----- |
-| jsonWithBigArray | 15746.152 | ± 524.543 | ops/s |
-| ksonWithBigArray | 21958.445 | ± 144.323 | ops/s |
+| Benchmark                 | Score     | Error     | Unit  |
+| ------------------------- | --------- | --------- | ----- |
+| jsonWithBigArray          | 15746.152 | ± 524.543 | ops/s |
+| ksonWithBigArray          | 21958.445 | ± 144.323 | ops/s |
+| jsonWithBigArray (Pretty) | 7477.957  | ± 115.563 | ops/s |
+| ksonWithBigArray (Pretty) | 8532.050  | ± 43.227  | ops/s |
 
 可以看到尽管 `Kotlin Lambda` 存在性能开销, 性能也要远优于 `JSON-java`
 
