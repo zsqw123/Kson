@@ -1,10 +1,8 @@
 ## Kson
 
-[`简体中文 zh-CN`](./READMECN.MD)
+轻量级的使用 `Kotlin DSL` 将 `Json` 渲染为 `String` 的渲染器
 
-A lightweight `Kotlin` DSL to render `Json` to `String`.
-
-### DSL
+### DSL 用法
 
 ```kotlin
 
@@ -15,10 +13,10 @@ obj { // object contains key-value
     "\"raw\":\"aaaa\"".raw() // raw json is allowed
 }
 arr // empty array
-arr[1, "s", null] // array with elements
-arr[listOf("awa",null,1,false)] // it can provided by any collections
+arr[1, "s", null] // 可以直接塞元素
+arr[listOf("awa",null,1,false)] // 也可也塞个集合
 
-// you can combine these elements whatever you want
+// 随便怎么瞎组都可以
 arr[
     1, 
     2,
@@ -46,11 +44,11 @@ arr[
 
 #### Pretty outputs
 
-When pass in the `pobj`, All children object `obj`, `arr` will be pretty.
+可以使用 `pobj`, 所有的 `子obj`, `子arr`, `子元素` 都可以被渲染
 
-When pass in the `parr`, Only those who are directly related elements will be pretty.
+如果使用 `parr`, 只有直接相关的`子元素`才会被渲染
 
-(*beacuse `parr` not change the namespace*)
+(*因为 `parr` 并没有改变命名空间*)
 
 ```kotlin
 pobj {
@@ -58,7 +56,7 @@ pobj {
         "1" - arr[
             arr[
                 obj{
-                    // work well, it will pretty print all children
+                    // 这样好 子元素可以被渲染
                 }
             ]
         ]
@@ -67,10 +65,10 @@ pobj {
 
 parr [
     1,
-    "awa", // directly related child will be render
-    arr[ // this arr will not pretty render
+    "awa", // 直接相关的子元素可以被渲染
+    arr[ // 这个就不会有 Pretty 渲染了, 会直接普通渲染
         pobj{
-            // `pobj` change the namespace, so here can be pretty render
+            // `pobj` 改变了命名空间, 下面的就可以优化渲染了
         }
     ]
 ]
