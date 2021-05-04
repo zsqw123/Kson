@@ -31,11 +31,11 @@ class NormalKsonArr {
     operator fun get(collection: Collection<Any?>) = get(*collection.toTypedArray())
     operator fun get(vararg array: Any?) = apply {
         sb.clear()
-        array.forEach {
-            if (it == null) sb.append("null")
-            else when (it) {
-                is Number, is Boolean, is NormalKson, is NormalKsonArr -> sb.append(it)
-                else -> wrapAppend(it.toString())
+        for (v in array) {
+            if (v == null) sb.append("null")
+            else when (v) {
+                is Number, is Boolean, is NormalKson, is NormalKsonArr -> sb.append(v)
+                else -> wrapAppend(v.toString())
             }
             sb.append(',')
         }
@@ -85,8 +85,8 @@ class PrettyKson(var level: Int = 0) {
     inline fun obj(crossinline action: PrettyKson.() -> Unit) = PrettyKson(level + 1).apply(action)
 
     override fun toString(): String {
-        ksonList.forEach { it.first.append(it.second.apply { level = this@PrettyKson.level + 1 }.toString()) }
-        arrList.forEach { it.first.append(it.second.apply { level = this@PrettyKson.level + 1 }.toString()) }
+        for (it in ksonList) it.first.append(it.second.apply { level = this@PrettyKson.level + 1 }.toString())
+        for (it in arrList) it.first.append(it.second.apply { level = this@PrettyKson.level + 1 }.toString())
         return list.toTypedArray().wrap(level, '{', '}').toString()
     }
 }
@@ -108,21 +108,21 @@ class PrettyKsonArr(var level: Int = 0) {
     operator fun get(vararg array: Any?) = apply {
         list = Array(array.size) { StringBuilder() }
         var idx = 0
-        array.forEach {
-            if (it == null) list[idx++].append("null")
-            else when (it) {
-                is PrettyKson -> ksonList.add(Node(list[idx++], it))
-                is PrettyKsonArr -> arrList.add(Node(list[idx++], it))
-                is Number, is Boolean -> list[idx++] = StringBuilder(it.toString())
-                else -> list[idx++].wrapAppend(it.toString())
+        for (v in array) {
+            if (v == null) list[idx++].append("null")
+            else when (v) {
+                is PrettyKson -> ksonList.add(Node(list[idx++], v))
+                is PrettyKsonArr -> arrList.add(Node(list[idx++], v))
+                is Number, is Boolean -> list[idx++] = StringBuilder(v.toString())
+                else -> list[idx++].wrapAppend(v.toString())
             }
         }
     }
 
     override fun toString(): String {
         if (!this::list.isInitialized) return "[]"
-        ksonList.forEach { it.first.append(it.second.apply { level = this@PrettyKsonArr.level + 1 }.toString()) }
-        arrList.forEach { it.first.append(it.second.apply { level = this@PrettyKsonArr.level + 1 }.toString()) }
+        for (it in ksonList) it.first.append(it.second.apply { level = this@PrettyKsonArr.level + 1 }.toString())
+        for (it in arrList) it.first.append(it.second.apply { level = this@PrettyKsonArr.level + 1 }.toString())
         return list.wrap(level, '[', ']').toString()
     }
 }

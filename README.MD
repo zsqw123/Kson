@@ -4,6 +4,8 @@
 
 A lightweight `Kotlin` DSL to render `Json` to `String`.
 
+Code: [Kson.kt](https://github.com/zsqw123/Kson/blob/master/src/main/kotlin/Kson.kt)
+
 ### DSL
 
 ```kotlin
@@ -104,7 +106,7 @@ Score in operations/second (throughput mode), higher is better
 | jsonWithBigArray          | 15746.152 | ± 524.543 | ops/s |
 | ksonWithBigArray          | 21958.445 | ± 144.323 | ops/s |
 | jsonWithBigArray (Pretty) | 7477.957  | ± 115.563 | ops/s |
-| ksonWithBigArray (Pretty) | 8532.050  | ± 43.227  | ops/s |
+| ksonWithBigArray (Pretty) | 8568.294  | ± 43.227  | ops/s |
 
 #### Thanks
 
