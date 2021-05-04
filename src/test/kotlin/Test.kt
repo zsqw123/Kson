@@ -1,5 +1,5 @@
 fun main() {
-    val another = arr[
+    val another = parr[
         1,
         null,
         arr[
@@ -14,7 +14,7 @@ fun main() {
             "awa" - 1
         }
     ]
-    obj {
+    pobj {
         "awa" - 1
         "b" - false
         "c" - "888"
@@ -65,7 +65,7 @@ fun main() {
     arr[listOf("awa", null, 1, false)].prl()
 
 // we can combine these elements whatever you want
-    obj {
+    pobj {
         "awa" - 1
         "QwQ" - false
         "qwq" - arr[listOf(1, null, false, "555")]

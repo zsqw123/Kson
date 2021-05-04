@@ -73,23 +73,19 @@ open class PrettyKson(l: Int = 0) {
     }
 
     operator fun String.minus(value: PrettyKson) = wrapAdd {
-        wrapAppend(this).append(':')
-        sb.append(value.apply { level = this@PrettyKson.level + 1 })
+        wrapAppend(this).append(':').append(value.apply { level = this@PrettyKson.level + 1 })
     }
 
     fun String.minus(value: PrettyKsonArr) = wrapAdd {
-        wrapAppend(this).append(':')
-        sb.append(value.apply { level = this@PrettyKson.level + 1 })
+        wrapAppend(this).append(':').append(value.apply { level = this@PrettyKson.level + 1 })
     }
 
     operator fun String.minus(value: Number) = wrapAdd {
-        wrapAppend(this).append(':')
-        sb.append(value)
+        wrapAppend(this).append(':').append(value)
     }
 
     operator fun String.minus(value: Boolean) = wrapAdd {
-        wrapAppend(this).append(':')
-        sb.append(value)
+        wrapAppend(this).append(':').append(value)
     }
 
     operator fun String.minus(value: Any?) = wrapAdd {
@@ -110,6 +106,7 @@ open class PrettyKson(l: Int = 0) {
     inline fun obj(crossinline action: PrettyKson.() -> Unit) = PrettyKson(level + 2).apply(action)
 
     override fun toString(): String {
+        sb.clear()
         sb.append('{')
         val whiteSpace = StringBuilder()
         repeat(level) { whiteSpace.append('\t') }
