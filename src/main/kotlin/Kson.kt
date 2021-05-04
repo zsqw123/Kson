@@ -70,13 +70,13 @@ class PrettyKson(var level: Int = 0) {
     private fun wrapAppend(string: String): StringBuilder = StringBuilder().append('\"').append(string).append('\"')
 
     operator fun String.minus(value: PrettyKson) {
-        list.add(null)
+        list.add(wrapAppend(this).append(':').toString())
         ksonList.add(value)
         ksonListIndex.add(list.lastIndex)
     }
 
     operator fun String.minus(value: PrettyKsonArr) {
-        list.add(null)
+        list.add(wrapAppend(this).append(':').toString())
         arrList.add(value)
         arrListIndex.add(list.lastIndex)
     }
@@ -105,9 +105,9 @@ class PrettyKson(var level: Int = 0) {
 
     override fun toString(): String {
         for (k in ksonList.indices)
-            list[ksonListIndex[k]] = ksonList[k].apply { level = this@PrettyKson.level + 1 }.toString()
+            list[ksonListIndex[k]] += ksonList[k].apply { level = this@PrettyKson.level + 1 }.toString()
         for (k in arrList.indices)
-            list[arrListIndex[k]] = arrList[k].apply { level = this@PrettyKson.level + 1 }.toString()
+            list[arrListIndex[k]] += arrList[k].apply { level = this@PrettyKson.level + 1 }.toString()
         val whiteSpace = StringBuilder()
         repeat(level) { whiteSpace.append('\t') }
         val sp = StringBuilder(",\n").append(whiteSpace).append('\t')

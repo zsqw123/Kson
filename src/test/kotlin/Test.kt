@@ -1,5 +1,5 @@
 fun main() {
-    val another = arr[
+    val another = parr[
         1,
         null,
         arr[

@@ -44,9 +44,11 @@ arr[
 
 #### Pretty outputs
 
-when pass in the `pobj`, All child object `obj, arr` will be pretty.
+when pass in the `pobj`, All child object `obj`, `arr` will be pretty.
 
 when pass in the `parr`, Only those who are directly related `obj` will be pretty.
+
+*beacuse `parr` not change the namespace*
 
 ```kotlin
 pobj {
