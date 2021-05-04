@@ -1,6 +1,3 @@
-import java.util.*
-import kotlin.collections.ArrayList
-
 open class NormalKson {
     private val sb by lazy { StringBuilder() }
     private fun wrapAppend(string: String): StringBuilder = sb.append('\"').append(string).append('\"')

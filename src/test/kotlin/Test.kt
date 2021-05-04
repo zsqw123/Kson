@@ -64,13 +64,14 @@ fun main() {
     arr[1, "s", null].prl() // array with elements
     arr[listOf("awa", null, 1, false)].prl()
 
-    parr[
-        pobj {
-            "awa" - 1
-            "QwQ" - false
-            "qwq" - arr[listOf(1, null, false, "555")]
-        }
-    ].prl()
+    pobj {
+        "awa" - 1
+        "QwQ" - false
+        "qwq" - arr[
+            3,
+            4
+        ]
+    }.prl()
 }
 
 fun Any.prl() = println(this)

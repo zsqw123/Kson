@@ -87,3 +87,23 @@ output like this:
 }
 ```
 
+### 跑个分
+
+跑分使用了 OpenJDK [jmh](https://openjdk.java.net/projects/code-tools/jmh/). 可以在 `benchmarks` 查看具体测试
+
+测试对象是 `Kson` 与最流行的JSON构建器之一 : [`JSON-java`](https://github.com/stleary/JSON-java)
+
+测试环境: *AMD Ryzen 7 4800U, 8 cores 16 threads, VM version: JDK 1.8.0_282, OpenJDK 64-Bit Server VM, 25.282-b08*
+
+每秒操作数得分（吞吐量模式），`Score` 越高越好, `Error` 绝对值越低越稳定
+
+| Benchmark        | Score     | Error     | Unit  |
+| ---------------- | --------- | --------- | ----- |
+| jsonWithBigArray | 15746.152 | ± 524.543 | ops/s |
+| ksonWithBigArray | 21958.445 | ± 144.323 | ops/s |
+
+可以看到尽管 `Kotlin Lambda` 存在性能开销, 性能也要远优于 `JSON-java`
+
+#### Thanks
+
+灵感来源于 [lectra-tech/koson](https://github.com/lectra-tech/koson), 仅借鉴其 `api`, 实现并不一致
