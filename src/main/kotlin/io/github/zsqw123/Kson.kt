@@ -1,3 +1,5 @@
+package io.github.zsqw123
+
 import java.util.*
 
 class NormalKson {
@@ -20,7 +22,7 @@ class NormalKson {
     }
 
     override fun toString(): String {
-        if (sb.isEmpty()) sb.append('.')
+        if (sb.isEmpty()) return "{}"
         return sb.insert(0, '{').deleteCharAt(sb.lastIndex).append('}').toString()
     }
 }
@@ -42,7 +44,7 @@ class NormalKsonArr {
     }
 
     override fun toString(): String {
-        if (sb.isEmpty()) sb.append('.')
+        if (sb.isEmpty()) return "[]"
         return sb.insert(0, '[').deleteCharAt(sb.lastIndex).append(']').toString()
     }
 }
@@ -139,13 +141,12 @@ inline fun pretty(crossinline action: PrettyWrapper.() -> Unit) = PrettyWrapper(
 
 class PrettyWrapper {
     var firstArr: PrettyKsonArr? = null
+    override fun toString() = (firstArr ?: "[]").toString()
+    inline fun obj(crossinline action: PrettyKson.() -> Unit) = PrettyKson().apply(action)
     val arr: PrettyKsonArr
         get() {
             val a = PrettyKsonArr()
             if (firstArr == null) firstArr = a
             return a
         }
-
-    inline fun obj(crossinline action: PrettyKson.() -> Unit) = PrettyKson().apply(action)
-    override fun toString() = (firstArr ?: "[]").toString()
 }

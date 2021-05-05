@@ -1,3 +1,5 @@
+import io.github.zsqw123.*
+
 fun main() {
     val another = pretty {
         arr[

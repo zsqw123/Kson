@@ -1,9 +1,18 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.15.1'
+    }
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
     id "org.jetbrains.kotlin.kapt" version "1.4.32"
 }
 
-apply from: 'pub.gradle'
+apply plugin: "com.vanniktech.maven.publish"
 group = 'io.github.zsqw123'
 version = '1.0'
 
@@ -14,4 +23,10 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20210307'
     implementation group: 'org.openjdk.jmh', name: 'jmh-core', version: '1.29'
     kaptTest group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: '1.29'
+}
+
+plugins.withId("com.vanniktech.maven.publish") {
+    mavenPublish {
+        sonatypeHost = "S01"
+    }
 }
