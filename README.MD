@@ -2,6 +2,8 @@
 
 [`简体中文 zh-CN`](./READMECN.MD)
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.zsqw123/kson)](https://search.maven.org/artifact/io.github.zsqw123/kson)
+
 A lightweight `Kotlin DSL` to render DSL style `Json` to `String`.
 
 Code: [Kson.kt](https://github.com/zsqw123/Kson/blob/master/src/main/kotlin/Kson.kt)
@@ -99,6 +101,14 @@ output like this:
         4
     ]
 }
+```
+
+### Use
+
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.zsqw123/kson)](https://search.maven.org/artifact/io.github.zsqw123/kson)
+
+```groovy
+implementation 'io.github.zsqw123:kson:$latest_version'
 ```
 
 ### Benchmark

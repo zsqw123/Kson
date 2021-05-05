@@ -1,5 +1,7 @@
 ## Kson
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.zsqw123/kson)](https://search.maven.org/artifact/io.github.zsqw123/kson)
+
 轻量级的将 `Kotlin DSL` 样式的`Json` 渲染为 `String` 的渲染器
 
 Code: [Kson.kt](https://github.com/zsqw123/Kson/blob/master/src/main/kotlin/Kson.kt)
@@ -97,6 +99,14 @@ output like this:
 		4
 	]
 }
+```
+
+### 使用
+
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.zsqw123/kson)](https://search.maven.org/artifact/io.github.zsqw123/kson)
+
+```groovy
+implementation 'io.github.zsqw123:kson:$latest_version'
 ```
 
 ### 跑个分
