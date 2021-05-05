@@ -1,6 +1,6 @@
 import java.util.*
 
-open class NormalKson {
+class NormalKson {
     private val sb by lazy { StringBuilder() }
     private fun wrapAppend(string: String): StringBuilder = sb.append('\"').append(string).append('\"')
     private fun String.normalAppend(v: Any): StringBuilder = wrapAppend(this).append(':').append(v).append(',')
@@ -56,6 +56,7 @@ class PrettyKson(var level: Int = 0) {
 
     operator fun String.minus(value: Number) = list.add(wrapAppend(this).append(':').append(value))
     operator fun String.minus(value: Boolean) = list.add(wrapAppend(this).append(':').append(value))
+    fun Any.raw() = list.add(StringBuilder(this.toString()))
     private fun wrapAppend(string: String): StringBuilder = StringBuilder().append('\"').append(string).append('\"')
 
     operator fun String.minus(value: PrettyKson) {
@@ -64,6 +65,7 @@ class PrettyKson(var level: Int = 0) {
         ksonList.add(Node(sb, value))
     }
 
+    operator fun String.minus(value: PrettyWrapper) = minus(value.firstArr ?: PrettyKsonArr())
     operator fun String.minus(value: PrettyKsonArr) {
         val sb = wrapAppend(this).append(':')
         list.add(sb)
@@ -77,11 +79,7 @@ class PrettyKson(var level: Int = 0) {
         list.add(sb)
     }
 
-    fun Any.raw() = list.add(StringBuilder(this.toString()))
-
-    val arr
-        get() = PrettyKsonArr()
-
+    val arr get() = PrettyKsonArr()
     inline fun obj(crossinline action: PrettyKson.() -> Unit) = PrettyKson(level + 1).apply(action)
 
     override fun toString(): String {
@@ -91,10 +89,8 @@ class PrettyKson(var level: Int = 0) {
     }
 }
 
-val arr
-    get() = NormalKsonArr()
-val parr
-    get() = PrettyKsonArr()
+val arr get() = NormalKsonArr()
+val parr get() = PrettyKsonArr()
 
 inline fun obj(crossinline action: NormalKson.() -> Unit) = NormalKson().apply(action)
 inline fun pobj(crossinline action: PrettyKson.() -> Unit) = PrettyKson().apply(action)
@@ -113,6 +109,7 @@ class PrettyKsonArr(var level: Int = 0) {
             else when (v) {
                 is PrettyKson -> ksonList.add(Node(list[idx++], v))
                 is PrettyKsonArr -> arrList.add(Node(list[idx++], v))
+                is PrettyWrapper -> arrList.add(Node(list[idx++], v.firstArr ?: PrettyKsonArr()))
                 is Number, is Boolean -> list[idx++] = StringBuilder(v.toString())
                 else -> list[idx++].wrapAppend(v.toString())
             }
@@ -136,4 +133,19 @@ fun Array<StringBuilder>.wrap(tabCount: Int, pre: Char = '{', end: Char = '}'): 
     val sb = StringBuilder().append(pre).append('\n').append(whiteSpace).append('\t')
     for (i in 0 until size - 1) sb.append(get(i)).append(sp)
     return sb.append(get(size - 1)).append('\n').append(whiteSpace).append(end)
+}
+
+inline fun pretty(crossinline action: PrettyWrapper.() -> Unit) = PrettyWrapper().apply(action)
+
+class PrettyWrapper {
+    var firstArr: PrettyKsonArr? = null
+    val arr: PrettyKsonArr
+        get() {
+            val a = PrettyKsonArr()
+            if (firstArr == null) firstArr = a
+            return a
+        }
+
+    inline fun obj(crossinline action: PrettyKson.() -> Unit) = PrettyKson().apply(action)
+    override fun toString() = (firstArr ?: "[]").toString()
 }

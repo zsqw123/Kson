@@ -1,19 +1,21 @@
 fun main() {
-    val another = parr[
-        1,
-        null,
+    val another = pretty {
         arr[
-            1, 2,
-            arr[1, 2,
-                obj {
-                    "awa" - 1
-                }
+            1,
+            null,
+            arr[
+                1, 2,
+                arr[1, 2,
+                    obj {
+                        "awa" - 1
+                    }
+                ],
             ],
-        ],
-        obj {
-            "awa" - 1
-        }
-    ]
+            obj {
+                "awa" - 1
+            }
+        ]
+    }
     pobj {
         "awa" - 1.3
         "b" - false

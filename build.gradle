@@ -3,8 +3,9 @@ plugins {
     id "org.jetbrains.kotlin.kapt" version "1.4.32"
 }
 
-group = 'com.zsqw123'
-version = '1.0-SNAPSHOT'
+apply from: 'pub.gradle'
+group = 'io.github.zsqw123'
+version = '1.0'
 
 repositories {
     mavenCentral()

@@ -1,6 +1,6 @@
 ## Kson
 
-轻量级的使用 `Kotlin DSL` 将 `Json` 渲染为 `String` 的渲染器
+轻量级的将 `Kotlin DSL` 样式的`Json` 渲染为 `String` 的渲染器
 
 Code: [Kson.kt](https://github.com/zsqw123/Kson/blob/master/src/main/kotlin/Kson.kt)
 
@@ -46,11 +46,11 @@ arr[
 
 #### Pretty outputs
 
-可以使用 `pobj`, 所有的 `子obj`, `子arr`, `子元素` 都可以被渲染
+有三种方式: `pobj`, `parr`, `pretty`
 
-如果使用 `parr`, 只有直接相关的`子元素`才会被渲染
+可以使用 `pobj`, 所有的 `子obj`, `子arr`, `子元素` 都可以被优化渲染
 
-(*因为 `parr` 并没有改变命名空间*)
+如果使用 `parr`, 只有直接相关的`子元素`才会被渲染, 因为 `parr` 并没有改变命名空间, 但是你可以使用 `pretty` 来使得第一个 `arr` 内的所有元素都可以被优化渲染
 
 ```kotlin
 pobj {
@@ -67,13 +67,23 @@ pobj {
 
 parr [
     1,
-    "awa", // 直接相关的子元素可以被渲染
+    "awa", // 直接相关的子元素可以被优化渲染
     arr[ // 这个就不会有 Pretty 渲染了, 会直接普通渲染
         pobj{
             // `pobj` 改变了命名空间, 下面的就可以优化渲染了
         }
     ]
 ]
+
+pretty {
+    arr [ // 第一个在 pretty 里面的 arr 可以优化渲染
+        1,
+        "awa",
+        arr[
+            // 这里面的也是可以被优化渲染的
+        ]
+    ]
+}
 ```
 
 output like this:

@@ -2,7 +2,7 @@
 
 [`简体中文 zh-CN`](./READMECN.MD)
 
-A lightweight `Kotlin` DSL to render `Json` to `String`.
+A lightweight `Kotlin DSL` to render DSL style `Json` to `String`.
 
 Code: [Kson.kt](https://github.com/zsqw123/Kson/blob/master/src/main/kotlin/Kson.kt)
 
@@ -48,11 +48,11 @@ arr[
 
 #### Pretty outputs
 
-When pass in the `pobj`, All children object `obj`, `arr` will be pretty.
+Three methods: `pobj`, `parr`, `pretty`
 
-When pass in the `parr`, Only those who are directly related elements will be pretty.
+When pass in the `pobj`, all children object `obj`, `arr` will be pretty.
 
-(*beacuse `parr` not change the namespace*)
+When pass in the `parr`, only those who are directly related elements will be pretty, beacuse `parr` not change the namespace, but it is available to use `pretty` wrapper to pretty `arr`.
 
 ```kotlin
 pobj {
@@ -76,18 +76,28 @@ parr [
         }
     ]
 ]
+
+pretty {
+    arr [ // first arr in `pretty` will be pretty
+        1,
+        "awa",
+        arr[
+            // available!
+        ]
+    ]
+}
 ```
 
 output like this:
 
 ```json
 {
-	"awa":1,
-	"QwQ":false,
-	"qwq":[
-		3,
-		4
-	]
+    "awa":1,
+    "QwQ":false,
+    "qwq":[
+        3,
+        4
+    ]
 }
 ```
 
